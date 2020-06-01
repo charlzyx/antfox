@@ -1,0 +1,76 @@
+{
+    "name": "foxantd",
+    "version": "0.0.1-beta0.1",
+    "description": "",
+    "main": "dist/foxantd.js",
+    "types": "./types",
+    "scripts": {
+        "start": "dumi dev",
+        "build:lib": "./node_modules/.bin/rollup -c",
+        "build:type": "tsc -p tsconfig.types.json && rm -rf ./types/**/__tests__",
+        "build": "npm run build:lib && npm run build:type",
+        "test": "jest test"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js,ts,tsx}": [
+            "eslint --fix"
+        ]
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^12.0.0",
+        "@rollup/plugin-node-resolve": "^8.0.0",
+        "@rollup/plugin-typescript": "^4.1.2",
+        "@testing-library/jest-dom": "^5.5.0",
+        "@testing-library/react": "^10.0.3",
+        "@types/jest": "^25.2.1",
+        "@types/react": "^16.9.34",
+        "@types/react-dom": "^16.9.6",
+        "@typescript-eslint/eslint-plugin": "^2.29.0",
+        "@typescript-eslint/parser": "^2.29.0",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-config-react-app": "^5.2.1",
+        "eslint-config-standard": "^14.1.1",
+        "eslint-plugin-flowtype": "^4.7.0",
+        "eslint-plugin-import": "^2.20.2",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^3.1.3",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-react": "^7.19.0",
+        "eslint-plugin-react-hooks": "^3.0.0",
+        "husky": "^4.2.5",
+        "jest": "^25.4.0",
+        "lint-staged": "^10.1.7",
+        "prettier": "^2.0.5",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "ts-jest": "^25.4.0",
+        "typescript": "^3.8.3"
+    },
+    "dependencies": {
+        "@types/yup": "^0.28.0",
+        "antd": "^4.1.5",
+        "cool-path": "^0.1.28",
+        "dumi": "^1.0.28",
+        "eslint-plugin-eslint-comments": "^3.2.0",
+        "eslint-plugin-jest": "^23.13.2",
+        "immer": "^6.0.3",
+        "lodash": "^4.17.15",
+        "moment": "^2.26.0",
+        "rollup": "^2.12.0",
+        "rxjs": "^6.5.5",
+        "tsconfig-paths-jest": "^0.0.1",
+        "usefox": "^0.0.1-beta0.1",
+        "yup": "^0.28.4"
+    }
+}

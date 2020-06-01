@@ -1,5 +1,5 @@
 import { Button, Col, Row } from 'antd';
-import { Field, Form, useAffect } from 'foxantd';
+import { Field, Form, useAffect } from 'antfox';
 import moment, { Moment } from 'moment';
 import React, { useCallback } from 'react';
 

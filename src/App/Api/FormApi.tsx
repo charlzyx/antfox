@@ -1,5 +1,5 @@
 import { Button, Radio } from 'antd';
-import { Field, Form, useAffect } from 'foxantd';
+import { Field, Form, useAffect } from 'antfox';
 import React, { useCallback, useState } from 'react';
 import * as Yup from 'yup';
 
@@ -84,7 +84,6 @@ const App = () => {
           placeholder="优先级更高的 disabled on Field"
           disabled
           label="神秘代码"
-          rule={Yup.string().max(6).min(1)}
         ></Field>
       </Form>
       <Button onClick={toReset}>重 置</Button>

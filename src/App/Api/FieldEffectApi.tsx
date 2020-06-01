@@ -1,5 +1,5 @@
 import { Button, Checkbox, Col, Row } from 'antd';
-import { Field, Form, useAffect } from 'foxantd';
+import { Field, Form, useAffect } from 'antfox';
 import React, { useCallback } from 'react';
 import * as Yup from 'yup';
 

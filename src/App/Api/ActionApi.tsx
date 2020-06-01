@@ -1,6 +1,7 @@
 import { Button, Checkbox, Col, Row } from 'antd';
-import { Field, Form, useAffect } from 'foxantd';
+import { Field, Form, useAffect } from 'antfox';
 import React, { useCallback, useEffect } from 'react';
+
 import * as Yup from 'yup';
 
 const init = {

@@ -1,5 +1,5 @@
 import { Button, Radio } from 'antd';
-import { Field, Form, useAffect } from 'foxantd';
+import { Field, Form, useAffect } from 'antfox';
 import React, { useCallback, useState } from 'react';
 import * as Yup from 'yup';
 

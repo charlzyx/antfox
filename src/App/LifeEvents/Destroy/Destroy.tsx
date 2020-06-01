@@ -1,4 +1,4 @@
-import { Field, Form, useAffect } from 'foxantd';
+import { Field, Form, useAffect } from 'antfox';
 import React, { useState } from 'react';
 
 const init = {

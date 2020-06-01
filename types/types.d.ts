@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { DatePicker } from 'antd';
 import type { AutoCompleteProps } from 'antd/es/auto-complete';
 import type { CascaderProps } from 'antd/es/cascader';
@@ -23,10 +24,11 @@ import type { UploadProps } from 'antd/es/upload';
 import type { PagerProps } from './main';
 import { TFieldOption, TFieldState } from 'usefox';
 import { MaybeLabel } from './Label';
-
-type Clean<T> = Omit<T, 'value' | 'onChange' | 'onBlur' | 'onFocus' | 'render'>;
-
-export type BuildIns = {
+declare type Clean<T> = Omit<
+  T,
+  'value' | 'onChange' | 'onBlur' | 'onFocus' | 'render'
+>;
+export declare type BuildIns = {
   AutoComplete: Clean<AutoCompleteProps>;
   Cascader: Clean<CascaderProps>;
   Checkbox: Clean<CheckboxProps>;
@@ -54,38 +56,38 @@ export type BuildIns = {
   Upload: Clean<UploadProps>;
   Pager: Clean<PagerProps>;
 };
-
-export type PickProps<T> = T extends (props: infer P1) => any
+export declare type PickProps<T> = T extends (props: infer P1) => any
   ? P1
   : T extends React.ComponentClass<infer P2>
   ? P2
   : {};
-
-type AsRenderFC<P> = P & { children?: any } & Partial<
-    TFieldState & TFieldOption
-  >;
-
-type FCLike<P = {}> = (props: AsRenderFC<P>) => JSX.Element | null;
-
-export type Comp = React.ComponentClass | FCLike;
-
-export type RenderProps<T extends object> = (
+declare type AsRenderFC<P> = P & {
+  children?: any;
+} & Partial<TFieldState & TFieldOption>;
+declare type FCLike<P = {}> = (props: AsRenderFC<P>) => JSX.Element | null;
+export declare type Comp = React.ComponentClass | FCLike;
+export declare type RenderProps<T extends object> = (
   status: TFieldState<T> & TFieldOption<T>,
 ) => React.ReactNode;
-
-export type Basic = TFieldOption & {
+export declare type Basic = TFieldOption & {
   withoutLabel?: true | false;
   role?: string;
 };
-
-export type AsComp<T> = {
+export declare type AsComp<T> = {
   as: T;
 };
-
-export type LimitProps = AsComp<keyof BuildIns | Comp> & Basic;
-
-export type FieldProps<T> = T extends AsComp<infer P>
+export declare type LimitProps = AsComp<keyof BuildIns | Comp> & Basic;
+export declare type FieldProps<T> = T extends AsComp<infer P>
   ? P extends keyof BuildIns
-    ? Omit<BuildIns[P], keyof TFieldState> & MaybeLabel<T> & Basic & { as: P }
-    : Omit<PickProps<P>, keyof TFieldState> & MaybeLabel<T> & Basic & { as: P }
+    ? Omit<BuildIns[P], keyof TFieldState> &
+        MaybeLabel<T> &
+        Basic & {
+          as: P;
+        }
+    : Omit<PickProps<P>, keyof TFieldState> &
+        MaybeLabel<T> &
+        Basic & {
+          as: P;
+        }
   : T & MaybeLabel<T> & Basic;
+export {};

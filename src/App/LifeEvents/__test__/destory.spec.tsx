@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import './mock';
 
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, waitFor, wait } from '@testing-library/react';
 
 import Destroy from '../Destroy/Destroy';
 
@@ -18,10 +18,10 @@ test('Destroy', async () => {
 
   expect(queryByRole('screen')?.innerHTML).toEqual('false');
   fireEvent.click(queryByRole('toggle')!);
-  await waitFor(() => waiting(233));
+  await wait(() => waiting(233));
   expect(queryByRole('user')?.getAttribute('value')).toBe('inituser');
   expect(queryByRole('screen')?.innerHTML).toEqual('false');
   fireEvent.click(queryByRole('toggle')!);
-  await waitFor(() => waiting(233));
+  await wait(() => waiting(233));
   expect(queryByRole('screen')?.innerHTML).toEqual('true');
 });

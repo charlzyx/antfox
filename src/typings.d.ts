@@ -1,7 +1,9 @@
+import 'antd';
+
 import './index';
 import { Schema } from 'yup';
 
-declare module 'foxantd' {}
+declare module 'antfox' {}
 
 import 'usefox';
 

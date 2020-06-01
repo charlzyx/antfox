@@ -3,11 +3,14 @@ import { defineConfig } from 'dumi';
 import path from 'path';
 
 export default defineConfig({
-    title: 'foxantd',
+    title: 'antfox',
     mode: 'site',
     hash: true,
     resolve: {
         previewLangs: ['ts'],
+    },
+    alias: {
+        '@@': path.resolve(__dirname, '../src')
     },
     navs: [null],
     // more config: https://d.umijs.org/config

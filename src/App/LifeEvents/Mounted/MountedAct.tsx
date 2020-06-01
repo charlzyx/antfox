@@ -1,4 +1,4 @@
-import { Field, Form, useAffect } from 'foxantd';
+import { Field, Form, useAffect } from 'antfox';
 import _ from 'lodash';
 import React from 'react';
 

@@ -20,7 +20,7 @@
     "noEmit": true,
     "jsx": "react",
     "paths": {
-      "foxantd": ["./src"]
+      "antfox": ["./src"]
     }
   },
   "include": [

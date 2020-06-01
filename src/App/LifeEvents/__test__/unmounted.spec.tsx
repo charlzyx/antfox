@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import './mock';
 
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, waitFor, wait } from '@testing-library/react';
 
 import React from 'react';
 import UnmountAct from '../Unmount/UnmountAct';
@@ -14,7 +14,7 @@ test('unmount$ on Act', async () => {
   await waitFor(() => queryByRole('toggle'));
   await waitFor(() => queryByRole('user'));
   fireEvent.click(queryByRole('toggle')!);
-  await waitFor(() => waiting(666));
+  await wait(() => waiting(666));
   fireEvent.click(queryByRole('toggle')!);
   await waitFor(() => queryByRole('user'));
 });
@@ -24,7 +24,7 @@ test('unmount$ on Field', async () => {
   await waitFor(() => queryByRole('toggle'));
   await waitFor(() => queryByRole('user'));
   fireEvent.click(queryByRole('toggle')!);
-  await waitFor(() => waiting(666));
+  await wait(() => waiting(666));
   fireEvent.click(queryByRole('toggle')!);
   await waitFor(() => queryByRole('user'));
 });

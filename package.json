@@ -1,13 +1,13 @@
 {
-    "name": "foxantd",
+    "name": "antfox",
     "version": "0.0.1-beta0.1",
     "description": "",
-    "main": "dist/foxantd.js",
+    "main": "dist/antfox.js",
     "types": "./types",
     "scripts": {
         "start": "dumi dev",
         "build:lib": "./node_modules/.bin/rollup -c",
-        "build:type": "tsc -p tsconfig.types.json && rm -rf ./types/**/__tests__",
+        "build:type": "tsc -p tsconfig.types.json && rm -rf ./types/App && rm -rf ./types/**/__tests__",
         "build": "npm run build:lib && npm run build:type",
         "test": "jest test"
     },
@@ -68,9 +68,10 @@
         "lodash": "^4.17.15",
         "moment": "^2.26.0",
         "rollup": "^2.12.0",
+        "rollup-plugin-visualizer": "^4.0.4",
         "rxjs": "^6.5.5",
         "tsconfig-paths-jest": "^0.0.1",
-        "usefox": "^0.0.1-beta0.1",
+        "usefox": "^0.0.1-beta0.4",
         "yup": "^0.28.4"
     }
 }

@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import './mock';
 
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, waitFor, wait } from '@testing-library/react';
 
 import LazyAffect from '../LazyAffect/LazyAffect';
 
@@ -19,7 +19,7 @@ test('Change by Act', async () => {
   expect(queryByRole('fllowage')).toBeNull();
 
   fireEvent.click(queryByRole('toggle')!);
-  await waitFor(() => waiting(233));
+  await wait(() => waiting(233));
   fireEvent.click(queryByRole('putuser')!);
   fireEvent.click(queryByRole('putage')!);
   expect(queryByRole('user')?.getAttribute('value')).toBe('userbyput');

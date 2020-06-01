@@ -1,14 +1,14 @@
 import '@testing-library/jest-dom';
 import './mock';
 
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, waitFor, wait } from '@testing-library/react';
 
 import ChangeAct from '../Change/ChangeAct';
 import ChangeField from '../Change/ChangeField';
 
 import React from 'react';
 
-const waiting = (t: number) => new Promise((r) => setTimeout(r, t));
+const waiting = (t: number) => new Promise<void>((r) => setTimeout(r, t));
 
 test('Change by Act', async () => {
   const { queryByRole } = render(<ChangeAct></ChangeAct>);
@@ -17,7 +17,7 @@ test('Change by Act', async () => {
 
   fireEvent.click(queryByRole('putuser')!);
   fireEvent.click(queryByRole('putage')!);
-  await waitFor(() => waiting(233));
+  await wait(() => waiting(233));
   expect(queryByRole('user')?.getAttribute('value')).toBe('userbyput');
   expect(queryByRole('age')?.getAttribute('value')).toBe('agebyput');
   expect(queryByRole('fllowuser')?.getAttribute('value')).toBe('userbyput');
@@ -31,7 +31,7 @@ test('Change by Field#effect', async () => {
 
   fireEvent.click(queryByRole('putuser')!);
   fireEvent.click(queryByRole('putage')!);
-  await waitFor(() => waiting(233));
+  await wait(() => waiting(233));
   expect(queryByRole('user')?.getAttribute('value')).toBe('userbyput');
   expect(queryByRole('age')?.getAttribute('value')).toBe('agebyput');
   expect(queryByRole('fllowuser')?.getAttribute('value')).toBe('userbyput');

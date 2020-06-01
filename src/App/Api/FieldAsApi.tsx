@@ -1,5 +1,5 @@
 import { Button, Col, Row } from 'antd';
-import { Field, Form, useAffect } from 'foxantd';
+import { Field, Form, useAffect } from 'antfox';
 import React, { FC, useCallback } from 'react';
 import * as Yup from 'yup';
 
@@ -10,6 +10,11 @@ const init = {
   renderprops: '',
   arrayrender: [],
   arrayObjectRender: [],
+  pager: {
+    page: 1,
+    size: 10,
+    total: 100,
+  },
 };
 
 class CustomeClassComp extends React.Component<{
@@ -83,6 +88,7 @@ const App = () => {
           label="用户名"
           rule={Yup.string().max(6).min(1)}
         ></Field>
+        <Field as="Pager" path="pager" label="页码"></Field>
         <h4>Function Component</h4>
         <Field
           as={CustomeField}

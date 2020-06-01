@@ -4,6 +4,7 @@
       "declaration": true,
       "declarationDir": "./types",
       "noEmit": false,
-      "emitDeclarationOnly": true
-  }
+      "emitDeclarationOnly": true,
+  },
+  "include": ["./src"]
 }

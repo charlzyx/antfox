@@ -1,4 +1,4 @@
-import { BuildIns, FieldProps, LimitProps } from 'foxantd';
+import { BuildIns, FieldProps, LimitProps } from 'antfox';
 import { useField, useNormalizeSerialize, useRemap } from 'usefox';
 
 import React from 'react';

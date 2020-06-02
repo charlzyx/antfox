@@ -17,6 +17,7 @@
 /.umi-production
 /.umi-test
 /.env.local
+build/
 
 .vscode/
 .idea/

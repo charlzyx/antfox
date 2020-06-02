@@ -6,6 +6,9 @@ export default defineConfig({
     title: 'antfox',
     mode: 'site',
     hash: true,
+    outputPath: "build",
+    base: 'antfox',
+    publicPath: "./",
     resolve: {
         previewLangs: ['ts'],
     },

@@ -1,8 +1,15 @@
 import { Form } from 'antd';
 import type { FormProps } from 'antd/es/form';
 import { Fox, TConfig } from 'usefox';
-import _ from 'lodash';
 import React, { Component } from 'react';
+
+const omit = (obj: Record<string, any>, keys: string[]) => {
+  const copy = { ...obj };
+  keys.forEach((k) => {
+    delete copy[k];
+  });
+  return copy;
+};
 
 type Props<T extends object> = TConfig<T> &
   Omit<
@@ -19,9 +26,9 @@ type Props<T extends object> = TConfig<T> &
     | 'onFinishFailed'
   >;
 
-const omitFoxConfig = _.memoize((props) => {
-  return _.omit(props, ['init', 'trigger', 'disabled', 'rules', 'act']);
-});
+const omitFoxConfig = (props: Record<string, any>) => {
+  return omit(props, ['init', 'trigger', 'disabled', 'rules', 'act']);
+};
 
 class FoxForm<T extends object> extends Component<Props<T>> {
   render() {

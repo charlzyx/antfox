@@ -1,22 +1,4 @@
-import {
-  AutoComplete,
-  Cascader,
-  Checkbox,
-  DatePicker,
-  Input,
-  InputNumber,
-  Mentions,
-  Pagination,
-  Radio,
-  Rate,
-  Select,
-  Slider,
-  Switch,
-  TimePicker,
-  Transfer,
-  TreeSelect,
-  Upload,
-} from 'antd';
+import { DatePicker } from 'antd';
 import type { AutoCompleteProps } from 'antd/es/auto-complete';
 import type { CascaderProps } from 'antd/es/cascader';
 import type { CheckboxGroupProps, CheckboxProps } from 'antd/es/checkbox';
@@ -39,11 +21,12 @@ import type { TimePickerProps } from 'antd/es/time-picker';
 import type { TransferProps } from 'antd/es/transfer';
 import type { TreeSelectProps } from 'antd/es/tree-select';
 import type { UploadProps } from 'antd/es/upload';
-import React, { FC } from 'react';
-
-type Clean<T> = Omit<T, 'value' | 'onChange' | 'onBlur' | 'onFocus' | 'render'>;
-
-export type BuildIns = {
+import React from 'react';
+declare type Clean<T> = Omit<
+  T,
+  'value' | 'onChange' | 'onBlur' | 'onFocus' | 'render'
+>;
+export declare type BuildIns = {
   AutoComplete: Clean<AutoCompleteProps>;
   Cascader: Clean<CascaderProps>;
   Checkbox: Clean<CheckboxProps>;
@@ -71,30 +54,14 @@ export type BuildIns = {
   Upload: Clean<UploadProps>;
   Pager: Clean<PagerProps>;
 };
-
-export type XSelectProps<VT = any> = SelectProps<VT> & {
+export declare type XSelectProps<VT = any> = SelectProps<VT> & {
   options?: {
     label: string | React.ReactNode;
     value: VT;
     key?: number | string;
   }[];
 };
-const XSelect: FC<XSelectProps> = ({ options, children, ...others }) => {
-  return (
-    <Select {...others}>
-      {Array.isArray(options)
-        ? options.map((op, idx) => {
-            return (
-              <Select.Option key={`${op.value}_${idx}`} value={op.value}>
-                {op.label}
-              </Select.Option>
-            );
-          })
-        : children}
-    </Select>
-  );
-};
-export type PagerProps = Omit<
+export declare type PagerProps = Omit<
   PaginationProps,
   'current' | 'pageSize' | 'pageSize' | 'onChange' | 'onShowSizeChange'
 > & {
@@ -105,64 +72,5 @@ export type PagerProps = Omit<
   };
   onChange?: (next: PagerProps['value']) => void;
 };
-
-const Pager: FC<PagerProps> = ({ value, onChange, ...others }) => {
-  return (
-    <Pagination
-      current={value?.page || 0}
-      pageSize={value?.size || 10}
-      onChange={(page, size) => {
-        if (onChange) {
-          onChange({
-            ...value,
-            total: value?.total || others.total,
-            page,
-            size,
-          });
-        }
-      }}
-      onShowSizeChange={(current, size) => {
-        if (onChange) {
-          onChange({
-            ...value,
-            total: value?.total || others.total,
-            page: current,
-            size,
-          });
-        }
-      }}
-      total={value?.total}
-      {...others}
-    ></Pagination>
-  );
-};
-
-export const lib: any = {
-  AutoComplete,
-  Cascader,
-  Checkbox,
-  CheckboxGroup: Checkbox.Group,
-  DatePicker,
-  MonthPicker: DatePicker.MonthPicker,
-  RangePicker: DatePicker.RangePicker,
-  WeekPicker: DatePicker.WeekPicker,
-  YearPicker: DatePicker.YearPicker,
-  Input: Input,
-  Search: Input.Search,
-  TextArea: Input.TextArea,
-  InputGroup: Input.Group,
-  Password: Input.Password,
-  InputNumber,
-  Mentions,
-  Radio,
-  RadioGroup: Radio.Group,
-  Rate,
-  Slider,
-  Switch,
-  TimePicker,
-  Transfer,
-  TreeSelect,
-  Upload,
-  Pager,
-  Select: XSelect,
-};
+export declare const lib: any;
+export {};

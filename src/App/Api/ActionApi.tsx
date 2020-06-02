@@ -47,7 +47,7 @@ const App = () => {
       console.log('act.watch$change#args', args);
     });
     act.watch$.init().subscribe((args) => {
-      console.log('NEVER!!!act.watch$init#args', args);
+      console.log('act.watch$init#args', args);
     });
     act.watch$.mounted().subscribe((args) => {
       console.log('act.watch$mounted#args', args);
@@ -103,6 +103,7 @@ const App = () => {
         ></Field>
         <Field
           path="toggle"
+          label="toggle password"
           as={({ value, onChange }) => {
             return (
               <Checkbox

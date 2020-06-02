@@ -1,5 +1,5 @@
 import { settings, TValidator } from 'usefox';
-const validtor: TValidator = ({ value, rule, path, rules, data }) => {
+const validtor: TValidator = ({ value, rule, path, rules, data, el }) => {
   if (rule) {
     const schema = rule;
     return schema

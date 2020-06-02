@@ -1,6 +1,6 @@
 import { Button, Col, Row } from 'antd';
 import { Field, Form, useAffect } from 'antfox';
-import React, { FC, useCallback } from 'react';
+import React, { FC, useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 
 const init = {
@@ -75,12 +75,22 @@ const App = () => {
     act.reset();
   }, [act]);
 
+  const inputRef = useRef<HTMLInputElement>();
+
   return (
     <div>
-      <div></div>
       <Form act={act} trigger="onChange" init={init}>
         <h2>as</h2>
         <h4>Build-Ins</h4>
+        <Field as="Input" path="reftest" forwardedRef={inputRef}></Field>
+        <Button
+          onClick={() => {
+            console.log('inputRef', inputRef);
+            inputRef.current?.focus();
+          }}
+        >
+          focus
+        </Button>
         <Field
           as="Input"
           path="username"

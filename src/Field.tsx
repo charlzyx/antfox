@@ -1,7 +1,7 @@
 import { BuildIns, FieldProps, LimitProps } from 'antfox';
 import { useField, useNormalizeSerialize, useRemap } from 'usefox';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Label from './Label';
 import { lib } from './main';
 const isBuildIn = (as: any): as is keyof BuildIns => {
@@ -19,13 +19,17 @@ function Field<T extends LimitProps>(all: FieldProps<T>) {
     normalize,
     serialize,
     remap,
+    forwardedRef,
     // @ts-check
     ...props
   } = all;
 
+  const elRef = useRef();
+
   const [ostate] = useField({
     ...props,
     valueKey: remap ? remap.value : undefined,
+    el: elRef,
   });
   const stateWithNS = useNormalizeSerialize(ostate, serialize, normalize);
   const state = useRemap(stateWithNS, remap);
@@ -42,10 +46,37 @@ function Field<T extends LimitProps>(all: FieldProps<T>) {
   }
 
   return noLabel ? (
-    <Child {...props}>{children}</Child>
+    <Child
+      ref={(target: any) => {
+        if (forwardedRef) {
+          if (typeof forwardedRef === 'function') {
+            forwardedRef(target);
+          } else {
+            (forwardedRef as any).current = target;
+          }
+        }
+        elRef.current = target;
+      }}
+      {...props}
+    >
+      {children}
+    </Child>
   ) : (
     <Label {...props} {...labelProps} state={state}>
-      <Child {...props} {...state}>
+      <Child
+        ref={(target: any) => {
+          if (forwardedRef) {
+            if (typeof forwardedRef === 'function') {
+              forwardedRef(target);
+            } else {
+              (forwardedRef as any).current = target;
+            }
+          }
+          elRef.current = target;
+        }}
+        {...props}
+        {...state}
+      >
         {children}
       </Child>
     </Label>

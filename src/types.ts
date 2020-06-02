@@ -10,20 +10,20 @@ export type PickProps<T> = T extends (props: infer P1) => any
   ? P2
   : {};
 
-type AsRenderFC<P> = P & { children?: any } & Partial<
+type AsRenderProps<P> = P & { children?: any } & Partial<
     TFieldState & TFieldOption
   >;
 
-type FCLike<P = {}> = (props: AsRenderFC<P>) => JSX.Element | null;
+export type FFC<P = {}> = (props: AsRenderProps<P>) => JSX.Element | null;
 
-export type Comp = React.ComponentClass | FCLike;
+export type Comp = React.ComponentClass | FFC;
 
 export type RenderProps<T extends object> = (
   status: TFieldState<T> & TFieldOption<T>,
 ) => React.ReactNode;
 
 export type Basic = TFieldOption & {
-  withoutLabel?: true | false;
+  noLabel?: true | false;
   role?: string;
   forwardedRef?: Omit<LegacyRef<any>, 'string'>;
 };

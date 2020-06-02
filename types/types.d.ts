@@ -17,7 +17,7 @@ export declare type RenderProps<T extends object> = (
   status: TFieldState<T> & TFieldOption<T>,
 ) => React.ReactNode;
 export declare type Basic = TFieldOption & {
-  withoutLabel?: true | false;
+  noLabel?: true | false;
   role?: string;
   forwardedRef?: Omit<LegacyRef<any>, 'string'>;
 };

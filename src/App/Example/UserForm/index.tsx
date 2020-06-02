@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Form, Field, useAffect } from 'antfox';
 import * as Yup from 'yup';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
+import moment from 'moment';
 
 import { Row, Col, Button, Popconfirm } from 'antd';
 
@@ -117,6 +118,10 @@ const App = () => {
           style={{ width: '100%' }}
           label="出生日期"
           path="birthday"
+          normalize={(x) => (x ? moment(x) : x)}
+          serialize={(v) => {
+            return v ? v.valueOf() : v;
+          }}
         ></Field>
         <Field
           label="联系我"

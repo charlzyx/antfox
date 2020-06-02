@@ -4,8 +4,28 @@ import { useField, useNormalizeSerialize, useRemap } from 'usefox';
 import React, { useRef } from 'react';
 import Label from './Label';
 import { lib } from './main';
+
 const isBuildIn = (as: any): as is keyof BuildIns => {
   return Object.keys(lib).indexOf(as) > -1;
+};
+
+const cleaning = <T extends Record<string, any>>(o: T): T => {
+  const copy = { ...o };
+  delete copy.effect;
+  delete copy.rule;
+  delete copy.visible;
+  delete copy.arrays;
+  delete copy.valid;
+  delete copy.init;
+  delete copy.withoutLabel;
+  delete copy.keep;
+  delete copy.modified;
+  delete copy.normalize;
+  delete copy.serialize;
+  delete copy.trigger;
+  delete copy.remap;
+  delete copy.touched;
+  return copy;
 };
 
 function Field<T extends LimitProps>(all: FieldProps<T>) {
@@ -39,43 +59,44 @@ function Field<T extends LimitProps>(all: FieldProps<T>) {
   }
 
   let Child: any;
+  let shouldclean = false;
   if (isBuildIn(as)) {
+    shouldclean = true;
     Child = lib[as];
   } else {
     Child = as;
   }
 
+  const refProps =
+    Child.length === 2 || Child instanceof React.Component
+      ? {
+          ref: (target: any) => {
+            if (forwardedRef) {
+              if (typeof forwardedRef === 'function') {
+                forwardedRef(target);
+              } else {
+                (forwardedRef as any).current = target;
+              }
+            }
+            elRef.current = target;
+          },
+        }
+      : {};
+
   return noLabel ? (
     <Child
-      ref={(target: any) => {
-        if (forwardedRef) {
-          if (typeof forwardedRef === 'function') {
-            forwardedRef(target);
-          } else {
-            (forwardedRef as any).current = target;
-          }
-        }
-        elRef.current = target;
-      }}
-      {...props}
+      {...refProps}
+      {...(shouldclean ? cleaning(props) : props)}
+      {...(shouldclean ? cleaning(state) : state)}
     >
       {children}
     </Child>
   ) : (
     <Label {...props} {...labelProps} state={state}>
       <Child
-        ref={(target: any) => {
-          if (forwardedRef) {
-            if (typeof forwardedRef === 'function') {
-              forwardedRef(target);
-            } else {
-              (forwardedRef as any).current = target;
-            }
-          }
-          elRef.current = target;
-        }}
-        {...props}
-        {...state}
+        {...refProps}
+        {...(shouldclean ? cleaning(props) : props)}
+        {...(shouldclean ? cleaning(state) : state)}
       >
         {children}
       </Child>

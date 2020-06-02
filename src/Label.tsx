@@ -80,16 +80,33 @@ const mapper = {
   },
 };
 
-const Label: FC<LabelProps> = ({ state, ...props }) => {
+const Label: FC<LabelProps> = ({ state, children, ...props }) => {
   const computed = useMemo(() => {
+    const copy: any = { ...props };
+    delete copy.effect;
+    delete copy.rule;
+    delete copy.visible;
+    delete copy.arrays;
+    delete copy.valid;
+    delete copy.init;
+    delete copy.keep;
+    delete copy.modified;
+    delete copy.normalize;
+    delete copy.serialize;
+    delete copy.trigger;
+    delete copy.remap;
+    delete copy.touched;
+    delete copy.withoutLabel;
     return {
+      ...copy,
       validateStatus: mapper.validateStatus(state.valid),
       hasFeedback: mapper.hasFeedback(state.valid),
       help: mapper.help(state.valid, state.help),
       role: '__nothing__',
+      children,
     };
-  }, [state]);
-  return <FormItem {...props} {...computed}></FormItem>;
+  }, [children, props, state.help, state.valid]);
+  return <FormItem {...computed}></FormItem>;
 };
 
 export default Label;

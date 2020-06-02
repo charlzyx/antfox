@@ -7,7 +7,7 @@
     "homepage": "https://charlzyx.github.io/antfox/",
     "scripts": {
         "start": "dumi dev",
-        "doc": "dumi build",
+        "doc": "dumi build && ./cp404.sh",
         "build:lib": "./node_modules/.bin/rollup -c",
         "build:type": "rm -rf ./types && tsc -p tsconfig.types.json && rm -rf ./types/App && rm -rf ./types/**/__tests__",
         "build": "npm run build:lib && npm run build:type",
@@ -73,12 +73,13 @@
         "yup": "^0.29.1"
     },
     "dependencies": {
+        "@ant-design/icons": "^4.2.1",
         "@types/lodash": "^4.14.154",
         "@types/yup": "^0.29.1",
         "antd": "^4.1.5",
         "antfox": "^0.0.1-beta0.2",
         "gh-pages": "^3.0.0",
         "lodash": "^4.17.15",
-        "usefox": "^0.0.1-beta0.6"
+        "usefox": "^0.0.1-beta0.9"
     }
 }

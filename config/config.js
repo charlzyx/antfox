@@ -8,7 +8,7 @@ export default defineConfig({
     hash: true,
     outputPath: "build",
     base: 'antfox',
-    publicPath: "./",
+    // publicPath: "./",
     resolve: {
         previewLangs: ['ts'],
     },

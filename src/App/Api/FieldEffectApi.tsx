@@ -49,9 +49,9 @@ const App = () => {
           placeholder="密码"
           visible={false}
           label="密码"
-          effect={({ listen, setup }) => {
+          effect={({ affect, setup }) => {
             let prev = '';
-            listen.change('toggle').subscribe(({ value }) => {
+            affect.change('toggle').subscribe(({ value }) => {
               setup((s) => {
                 s.visible = !!value;
                 if (s.visible) {

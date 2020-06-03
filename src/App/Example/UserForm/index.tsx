@@ -1,147 +1,32 @@
-import React, { FC } from 'react';
-import { Form, Field, useAffect, FFC, TEffect } from 'antfox';
-import * as Yup from 'yup';
-import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Col, Row } from 'antd';
+import { Field, Form, useAffect } from 'antfox';
 import moment from 'moment';
-
-import { Row, Col, Button, Popconfirm } from 'antd';
-
-const init = () => {
-  return {
-    username: '',
-    password: '',
-    withGender: false,
-    gender: '',
-    birthday: '',
-    links: [],
-  };
-};
-
-type Link = { type: string; value: string };
-const Appender: FC<{
-  onSubmit: (val: Link) => void;
-}> = ({ onSubmit }) => {
-  const act = useAffect<Link>();
-  return (
-    <Row justify="end">
-      <Popconfirm
-        onCancel={() => {
-          act.reset();
-        }}
-        onConfirm={() => {
-          act.trim();
-          act.checking().then((next) => {
-            onSubmit({ ...next });
-            act.reset();
-          });
-        }}
-        title={
-          <Form act={act} layout="vertical">
-            <Field
-              as="RadioGroup"
-              label="类型"
-              path="type"
-              options={[
-                { label: '手机号', value: 'phone' },
-                { label: '微信', value: 'wechat' },
-                { label: 'QQ', value: 'qq' },
-              ]}
-            ></Field>
-            <Field as="Input" path="value" label="值"></Field>
-          </Form>
-        }
-      >
-        <Button>
-          <PlusOutlined></PlusOutlined>
-          添加联系方式
-        </Button>
-      </Popconfirm>
-    </Row>
-  );
-};
-
-const LinkEditor: FFC = ({ value, arrays }) => {
-  return (
-    <div>
-      <div style={{ padding: '16px 0' }}>
-        <Appender onSubmit={(v) => arrays?.push(v)}></Appender>
-      </div>
-      <div>
-        {Array.isArray(value)
-          ? value.map((x, idx) => {
-              return (
-                <Row
-                  key={idx}
-                  justify="space-between"
-                  style={{ paddingRight: '32px' }}
-                >
-                  <Col>
-                    <Field
-                      noLabel
-                      as="RadioGroup"
-                      path={`links[${idx}].type`}
-                      options={[
-                        { label: '手机号', value: 'phone' },
-                        { label: '微信', value: 'wechat' },
-                        { label: 'QQ', value: 'qq' },
-                      ]}
-                    ></Field>
-                  </Col>
-                  <Col>
-                    <Field
-                      as="Input"
-                      path={`links[${idx}].value`}
-                      rule={Yup.string().required('此字段为必填')}
-                    ></Field>
-                  </Col>
-                  <Col>
-                    <Button
-                      onClick={() => {
-                        arrays?.remove(idx);
-                      }}
-                    >
-                      <CloseOutlined />
-                      删除
-                    </Button>
-                  </Col>
-                </Row>
-              );
-            })
-          : 'no data'}
-      </div>
-    </div>
-  );
-};
-
-type Keys = keyof ReturnType<typeof init>;
-const effects: {
-  [K in Keys]?: TEffect;
-} = {
-  gender: ({ listen, setup }) => {
-    listen.init().subscribe(({ data }) => {
-      setup((s) => {
-        s.visible = data.withGender;
-      });
-    });
-    listen.change('withGender').subscribe(({ value }) => {
-      setup((s) => {
-        s.visible = value;
-        if (value) {
-          s.rule = Yup.string().min(1, '请选择性别').required('请选择性别');
-        } else {
-          s.rule = Yup.string();
-        }
-      });
-    });
-  },
-};
+import React from 'react';
+import * as Yup from 'yup';
+import CardBlock from './comps/CardBlock';
+import LinkEditor from './comps/LinkEditor';
+import { effects, init } from './config';
 
 const App = () => {
   const act = useAffect<ReturnType<typeof init>>();
 
   return (
     <div>
-      <Form act={act} layout="vertical" init={init()}>
+      <Form
+        rules={Yup.object({
+          password: Yup.string()
+            .max(16, '密码最多16个字')
+            .min(2, '密码最少2个字')
+            .required('请填写密码'),
+          passwordConfirm: Yup.string().oneOf(
+            [Yup.ref('password'), ''],
+            '请确认密码填写一致',
+          ),
+        })}
+        act={act}
+        layout="vertical"
+        init={init()}
+      >
         <Field
           as="Input"
           path="username"
@@ -153,8 +38,15 @@ const App = () => {
           as="Password"
           path="password"
           label="密码"
+          trigger="onBlur"
           placeholder="在此输入密码"
-          rule={Yup.string().max(16, '最多16个字符').min(4, '最少4个字符')}
+        ></Field>
+        <Field
+          as="Password"
+          path="passwordConfirm"
+          label="重复密码"
+          trigger="onBlur"
+          placeholder="请再次输入密码"
         ></Field>
         <Field
           as="Switch"
@@ -163,6 +55,14 @@ const App = () => {
             value: 'checked',
           }}
           label="是否启用性别"
+        ></Field>
+        <Field
+          as="Switch"
+          path="withCard"
+          remap={{
+            value: 'checked',
+          }}
+          label="是否启用 Card"
         ></Field>
         <Field
           as="RadioGroup"
@@ -194,6 +94,13 @@ const App = () => {
           label="联系我"
           path="links"
           rule={Yup.array().max(3, '最多录入3条')}
+        ></Field>
+        <Field
+          label="卡号信息, 注意我没有 path"
+          title="CardBolockTitle"
+          visible={false}
+          as={CardBlock}
+          effect={effects.card}
         ></Field>
         <Row justify="end" gutter={16}>
           <Col>

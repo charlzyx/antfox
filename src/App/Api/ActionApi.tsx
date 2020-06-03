@@ -118,8 +118,8 @@ const App = () => {
           path="password"
           placeholder="这里填写密码"
           label="密码"
-          effect={({ listen, setup }) => {
-            listen.change('toggle').subscribe(({ value }) => {
+          effect={({ affect, setup }) => {
+            affect.change('toggle').subscribe(({ value }) => {
               setup((s) => {
                 s.visible = !!value;
               });

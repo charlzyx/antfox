@@ -14,7 +14,7 @@ type AsRenderProps<P> = P & { children?: any } & Partial<
     TFieldState & TFieldOption
   >;
 
-export type FFC<P = {}> = (props: AsRenderProps<P>) => JSX.Element | null;
+export type FFC<P = any> = (props: AsRenderProps<P>) => JSX.Element | null;
 
 export type Comp = React.ComponentClass | FFC;
 

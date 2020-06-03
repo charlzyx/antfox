@@ -10,7 +10,6 @@ export type {
   TAct,
   TConfig,
   TEffect,
-  TEffectListen,
   TFieldOption,
   TFieldState,
   TTrigger,

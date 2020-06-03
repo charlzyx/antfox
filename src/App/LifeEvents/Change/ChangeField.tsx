@@ -42,8 +42,8 @@ const App = () => {
           as="Input"
           path="fllowuser"
           placeholder="fllowuser"
-          effect={({ listen, setup }) => {
-            listen.change('user').subscribe(({ value }) => {
+          effect={({ affect, setup }) => {
+            affect.change('user').subscribe(({ value }) => {
               setup((d) => {
                 d.value = value;
               });
@@ -54,8 +54,8 @@ const App = () => {
           role="fllowage"
           as="Input"
           path="fllowage"
-          effect={({ listen, setup }) => {
-            listen.change('age').subscribe(({ value }) => {
+          effect={({ affect, setup }) => {
+            affect.change('age').subscribe(({ value }) => {
               setup((d) => {
                 d.value = value;
               });

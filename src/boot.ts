@@ -1,31 +1,37 @@
-import { settings, TValidator } from 'usefox';
+import { settings, TValidator, VALIDSTATUS } from 'usefox';
 const validtor: TValidator = ({ value, rule, path, rules, data, el }) => {
-  console.log('validator:::' + path + '//', value, rule);
   if (rule) {
     const schema = rule;
     return schema
       .validate(value.current)
       .then(() => {
-        console.log('validator::: WTFFF 通过' + path + '//', value, rule);
         return '验证通过';
       })
       .catch((err) => {
-        console.log('validator::: WTFFF 不通过' + path + '//', value, rule);
         throw err.message;
       });
   } else {
     const schema = rules;
     if (!schema) {
-      return Promise.resolve('不需要验证');
+      return Promise.resolve(VALIDSTATUS.CLEAR);
     }
-    return schema
-      .validateAt(path, data.current)
-      .then(() => {
-        return '验证通过';
-      })
-      .catch((err) => {
-        throw err.message;
-      });
+    try {
+      return schema
+        .validateAt(path, data.current)
+        .then(() => {
+          return '验证通过';
+        })
+        .catch((err) => {
+          throw err.message;
+        });
+    } catch (error) {
+      const msg = error.message;
+      if (/he schema does not contain the path:/.test(msg)) {
+        return Promise.resolve(VALIDSTATUS.CLEAR);
+      } else {
+        return Promise.reject(error.message);
+      }
+    }
   }
 };
 

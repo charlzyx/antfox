@@ -54,8 +54,8 @@ const App = () => {
 
         <Field
           role="user"
-          effect={({ listen, setup }) => {
-            listen.change('has').subscribe(({ value }) => {
+          effect={({ affect, setup }) => {
+            affect.change('has').subscribe(({ value }) => {
               setup((draft) => {
                 draft.visible = value !== 'false';
               });
@@ -69,8 +69,8 @@ const App = () => {
         <Field
           role="userwithInit"
           init="userwithInit"
-          effect={({ listen, setup }) => {
-            listen.change('has').subscribe(({ value }) => {
+          effect={({ affect, setup }) => {
+            affect.change('has').subscribe(({ value }) => {
               setup((draft) => {
                 draft.visible = value !== 'false';
               });
@@ -84,8 +84,8 @@ const App = () => {
         <Field
           role="age"
           keep
-          effect={({ listen, setup }) => {
-            listen.change('has').subscribe(({ value }) => {
+          effect={({ affect, setup }) => {
+            affect.change('has').subscribe(({ value }) => {
               setup((draft) => {
                 draft.visible = value !== 'false';
               });

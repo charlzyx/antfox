@@ -42,9 +42,8 @@ const App = () => {
           role="fllowuser"
           as="Input"
           path="fllowuser"
-          effect={({ listen, setup }) => {
-            listen.reset<typeof init>().subscribe(({ data }) => {
-              console.log('wtffff', data);
+          effect={({ affect, setup }) => {
+            affect.reset<typeof init>().subscribe(({ data }) => {
               setup((d) => {
                 d.value = data.user;
               });

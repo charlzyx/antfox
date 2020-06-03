@@ -8,11 +8,13 @@ export declare type PickProps<T> = T extends (props: infer P1) => any
   : T extends React.ComponentClass<infer P2>
   ? P2
   : {};
-declare type AsRenderFC<P> = P & {
+declare type AsRenderProps<P> = P & {
   children?: any;
 } & Partial<TFieldState & TFieldOption>;
-declare type FCLike<P = {}> = (props: AsRenderFC<P>) => JSX.Element | null;
-export declare type Comp = React.ComponentClass | FCLike;
+export declare type FFC<P = any> = (
+  props: AsRenderProps<P>,
+) => JSX.Element | null;
+export declare type Comp = React.ComponentClass | FFC;
 export declare type RenderProps<T extends object> = (
   status: TFieldState<T> & TFieldOption<T>,
 ) => React.ReactNode;

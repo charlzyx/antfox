@@ -27,7 +27,7 @@ const App = () => {
 
         <Field
           role="user"
-          effect={({ on, listen, setup }) => {
+          effect={({ on, affect, setup }) => {
             // 默认 keep = false 卸载之后重新挂载, 值被清空为 undefined, 同时字段被删掉
             let flag = false;
             on.mounted$().subscribe((v) => {
@@ -38,7 +38,7 @@ const App = () => {
             on.unmount$().subscribe(() => {
               flag = true;
             });
-            listen.change('has').subscribe(({ value }) => {
+            affect.change('has').subscribe(({ value }) => {
               setup((draft) => {
                 draft.visible = value !== 'false';
               });
@@ -52,7 +52,7 @@ const App = () => {
         <Field
           role="userwithInit"
           init="userwithInit"
-          effect={({ on, listen, setup }) => {
+          effect={({ on, affect, setup }) => {
             // 默认 keep = false 卸载之后重新挂载, 值被清空为 undefined,
             // 重新挂载之后, 因为有 keep 的存在, 字段被重新赋值为 init
             let flag = false;
@@ -64,7 +64,7 @@ const App = () => {
             on.unmount$().subscribe(() => {
               flag = true;
             });
-            listen.change('has').subscribe(({ value }) => {
+            affect.change('has').subscribe(({ value }) => {
               setup((draft) => {
                 draft.visible = value !== 'false';
               });
@@ -78,13 +78,13 @@ const App = () => {
         <Field
           role="age"
           keep
-          effect={({ on, listen, setup }) => {
+          effect={({ on, affect, setup }) => {
             // keep = true 卸载之后重新挂载,  那么, 不会
             // 触发 unmount$
             on.unmount$().subscribe(() => {
               console.log('never');
             });
-            listen.change('has').subscribe(({ value }) => {
+            affect.change('has').subscribe(({ value }) => {
               setup((draft) => {
                 draft.visible = value !== 'false';
               });

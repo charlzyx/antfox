@@ -2,4 +2,15 @@ import './boot';
 export { default as Field } from './Field';
 export { default as Form } from './Form';
 export * from './types';
-export * from 'usefox';
+export { match, useAffect, useField, useNormalizeSerialize } from 'usefox';
+export type {
+  Rule,
+  Rules,
+  TAct,
+  TConfig,
+  TEffect,
+  TFieldOption,
+  TFieldState,
+  TTrigger,
+  TWatch$,
+} from 'usefox';

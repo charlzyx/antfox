@@ -1,6 +1,26 @@
 import { TEffect } from 'antfox';
 import * as Yup from 'yup';
 
+export const api = {
+  get(): any {
+    return new Promise((resolve, reject) => {
+      const s = window.localStorage.getItem('__USER_FORM__');
+      setTimeout(() => {
+        const v = s ? JSON.parse(s) : {};
+        resolve(v);
+      }, 1000);
+    });
+  },
+  put(values: any) {
+    return new Promise((resolve, reject) => {
+      window.localStorage.setItem('__USER_FORM__', JSON.stringify(values));
+      setTimeout(() => {
+        resolve(values);
+      }, 2000);
+    });
+  },
+};
+
 export const init = () => {
   return {
     username: '',
@@ -24,11 +44,6 @@ export const effects: {
   [K in Keys]?: TEffect;
 } = {
   gender: ({ affect, setup }) => {
-    affect.init().subscribe(({ data }) => {
-      setup((s) => {
-        s.visible = data.withGender;
-      });
-    });
     affect.change('withGender').subscribe(({ value }) => {
       setup((s) => {
         s.visible = value;
@@ -42,6 +57,7 @@ export const effects: {
   },
   card: ({ affect, setup }) => {
     affect.change('withCard').subscribe(({ value }) => {
+      console.log('affect card');
       setup((s) => {
         s.visible = value;
       });

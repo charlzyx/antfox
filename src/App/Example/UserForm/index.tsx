@@ -1,14 +1,22 @@
-import { Button, Col, Row } from 'antd';
+import { Button, Col, Row, message } from 'antd';
 import { Field, Form, useAffect } from 'antfox';
 import moment from 'moment';
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as Yup from 'yup';
 import CardBlock from './comps/CardBlock';
 import LinkEditor from './comps/LinkEditor';
-import { effects, init } from './config';
+import { effects, init, api } from './config';
 
+type Data = ReturnType<typeof init>;
 const App = () => {
-  const act = useAffect<ReturnType<typeof init>>();
+  const act = useAffect<Data>();
+  useEffect(() => {
+    message.loading('数据装载中....');
+    api.get().then((data: Data) => {
+      message.destroy();
+      act.reset({ ...init(), ...data });
+    });
+  }, [act]);
 
   return (
     <div>
@@ -18,10 +26,9 @@ const App = () => {
             .max(16, '密码最多16个字')
             .min(2, '密码最少2个字')
             .required('请填写密码'),
-          passwordConfirm: Yup.string().oneOf(
-            [Yup.ref('password'), ''],
-            '请确认密码填写一致',
-          ),
+          passwordConfirm: Yup.string()
+            .oneOf([Yup.ref('password'), ''], '请确认密码填写一致')
+            .required('请填写确认密码'),
         })}
         act={act}
         layout="vertical"
@@ -45,7 +52,6 @@ const App = () => {
           as="Password"
           path="passwordConfirm"
           label="重复密码"
-          trigger="onBlur"
           placeholder="请再次输入密码"
         ></Field>
         <Field
@@ -93,16 +99,26 @@ const App = () => {
           as={LinkEditor}
           label="联系我"
           path="links"
+          init={[]}
           rule={Yup.array().max(3, '最多录入3条')}
         ></Field>
         <Field
-          label="卡号信息, 注意我没有 path"
-          title="CardBolockTitle"
+          label="卡号信息, 注意没有 path"
+          title="CardBolockTitle, 注意 CardBlock 内部的 keep"
           visible={false}
           as={CardBlock}
           effect={effects.card}
         ></Field>
         <Row justify="end" gutter={16}>
+          <Col>
+            <Button
+              onClick={() => {
+                act.reset({} as any);
+              }}
+            >
+              清空
+            </Button>
+          </Col>
           <Col>
             <Button
               onClick={() => {
@@ -119,6 +135,10 @@ const App = () => {
                 act.trim();
                 act.checking().then((data) => {
                   console.log('save....', data);
+                  message.loading('保存中...');
+                  api.put(data).then(() => {
+                    message.destroy();
+                  });
                 });
               }}
             >

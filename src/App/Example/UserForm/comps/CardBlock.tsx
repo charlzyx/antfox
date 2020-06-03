@@ -5,8 +5,9 @@ import React from 'react';
 const CardBlock: FFC<{ title: string }> = ({ title }) => (
   <div>
     <h1>{title}</h1>
-    <Field label="卡号" as="Input" path="card.no"></Field>
+    <Field keep label="卡号" as="Input" path="card.no"></Field>
     <Field
+      keep
       label="有效期"
       as="RangePicker"
       normalize={(x) => {

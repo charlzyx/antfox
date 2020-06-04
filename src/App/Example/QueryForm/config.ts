@@ -1,5 +1,4 @@
 import { TEffect } from 'antfox';
-import * as Yup from 'yup';
 
 export type TSearch = {
   page: number;
@@ -9,14 +8,18 @@ export type TSearch = {
   date?: Date;
   total?: number;
 };
+
+export type TItem = {
+  id: number;
+  title: string;
+};
 export const api = {
   get(
     query: TSearch,
   ): Promise<{
-    list: any[];
+    list: TItem[];
     total: number;
   }> {
-    console.log('query', query);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const list = new Array(query.size).fill(0).map((x, i) => {
@@ -38,7 +41,7 @@ export const init = (): TSearch => {
   return {
     page: 1,
     size: 5,
-    total: 5,
+    total: 0,
   };
 };
 

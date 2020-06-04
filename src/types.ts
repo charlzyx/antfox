@@ -23,12 +23,12 @@ export type RenderProps<T extends object> = (
 ) => React.ReactNode;
 
 export type Basic = TFieldOption & {
-  noLabel?: true | false;
   role?: string;
   forwardedRef?: Omit<LegacyRef<any>, 'string'>;
 };
 
 export type AsComp<T> = {
+  noLabel?: true | false;
   as: T;
 };
 
@@ -36,6 +36,10 @@ export type LimitProps = AsComp<keyof BuildIns | Comp> & Basic;
 
 export type FieldProps<T> = T extends AsComp<infer P>
   ? P extends keyof BuildIns
-    ? Omit<BuildIns[P], keyof TFieldState> & MaybeLabel<T> & Basic & { as: P }
-    : Omit<PickProps<P>, keyof TFieldState> & MaybeLabel<T> & Basic & { as: P }
+    ? Omit<BuildIns[P], keyof TFieldState> &
+        MaybeLabel<T['noLabel']> &
+        Basic & { as: P }
+    : Omit<PickProps<P>, keyof TFieldState> &
+        MaybeLabel<T['noLabel']> &
+        Basic & { as: P }
   : T & MaybeLabel<T> & Basic;

@@ -1,6 +1,18 @@
 import { TEffect } from 'antfox';
 import * as Yup from 'yup';
 
+export const options = {
+  gender: [
+    { label: 'man', value: 'man' },
+    { label: 'woman', value: 'woman' },
+    { label: 'unknown', value: 'unknown' },
+    {
+      label: 'People who post helpful response on Stack Overflow',
+      value: 'god',
+    },
+  ],
+};
+
 export const api = {
   get(): any {
     return new Promise((resolve, reject) => {

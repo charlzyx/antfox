@@ -65,6 +65,7 @@ export declare type PagerProps = Omit<
   PaginationProps,
   'current' | 'pageSize' | 'pageSize' | 'onChange' | 'onShowSizeChange'
 > & {
+  loading?: boolean;
   value?: {
     page: PaginationProps['current'];
     size: PaginationProps['pageSize'];

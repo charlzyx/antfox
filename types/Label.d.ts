@@ -31,15 +31,10 @@ declare type WithLabel = {
   noLabel?: false;
   labelProps?: CleanLabel;
 } & CleanLabel;
-declare type isNoLabel = {
-  noLabel: true;
-};
 declare type NeverLabel = {
   noLabel: true;
   labelProps?: never;
 };
-export declare type MaybeLabel<T> = T extends isNoLabel
-  ? NeverLabel
-  : WithLabel;
+export declare type MaybeLabel<T> = T extends true ? NeverLabel : WithLabel;
 declare const Label: FC<LabelProps>;
 export default Label;

@@ -4,6 +4,7 @@ import {
   Checkbox,
   DatePicker,
   Input,
+  Spin,
   InputNumber,
   Mentions,
   Pagination,
@@ -98,6 +99,7 @@ export type PagerProps = Omit<
   PaginationProps,
   'current' | 'pageSize' | 'pageSize' | 'onChange' | 'onShowSizeChange'
 > & {
+  loading?: boolean;
   value?: {
     page: PaginationProps['current'];
     size: PaginationProps['pageSize'];
@@ -106,34 +108,43 @@ export type PagerProps = Omit<
   onChange?: (next: PagerProps['value']) => void;
 };
 
-const Pager: FC<PagerProps> = ({ value, onChange, ...others }) => {
+const Pager: FC<PagerProps> = ({ value, onChange, loading, ...others }) => {
   return (
-    <Pagination
-      current={value?.page || 0}
-      pageSize={value?.size || 10}
-      onChange={(page, size) => {
-        if (onChange) {
-          onChange({
-            ...value,
-            total: value?.total || others.total,
-            page,
-            size,
-          });
-        }
-      }}
-      onShowSizeChange={(current, size) => {
-        if (onChange) {
-          onChange({
-            ...value,
-            total: value?.total || others.total,
-            page: current,
-            size,
-          });
-        }
-      }}
-      total={value?.total}
-      {...others}
-    ></Pagination>
+    <Spin spinning={loading} indicator={<span></span>}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+        }}
+      >
+        <Pagination
+          current={value?.page || 0}
+          pageSize={value?.size || 10}
+          onChange={(page, size) => {
+            if (onChange) {
+              onChange({
+                ...value,
+                total: value?.total || others.total,
+                page,
+                size,
+              });
+            }
+          }}
+          onShowSizeChange={(current, size) => {
+            if (onChange) {
+              onChange({
+                ...value,
+                total: value?.total || others.total,
+                page: current,
+                size,
+              });
+            }
+          }}
+          total={value?.total}
+          {...others}
+        ></Pagination>
+      </div>
+    </Spin>
   );
 };
 

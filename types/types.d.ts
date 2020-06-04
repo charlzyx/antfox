@@ -19,23 +19,23 @@ export declare type RenderProps<T extends object> = (
   status: TFieldState<T> & TFieldOption<T>,
 ) => React.ReactNode;
 export declare type Basic = TFieldOption & {
-  noLabel?: true | false;
   role?: string;
   forwardedRef?: Omit<LegacyRef<any>, 'string'>;
 };
 export declare type AsComp<T> = {
+  noLabel?: true | false;
   as: T;
 };
 export declare type LimitProps = AsComp<keyof BuildIns | Comp> & Basic;
 export declare type FieldProps<T> = T extends AsComp<infer P>
   ? P extends keyof BuildIns
     ? Omit<BuildIns[P], keyof TFieldState> &
-        MaybeLabel<T> &
+        MaybeLabel<T['noLabel']> &
         Basic & {
           as: P;
         }
     : Omit<PickProps<P>, keyof TFieldState> &
-        MaybeLabel<T> &
+        MaybeLabel<T['noLabel']> &
         Basic & {
           as: P;
         }

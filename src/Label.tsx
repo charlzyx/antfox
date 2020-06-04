@@ -37,15 +37,11 @@ type WithLabel = {
   labelProps?: CleanLabel;
 } & CleanLabel;
 
-type isNoLabel = {
-  noLabel: true;
-};
-
 type NeverLabel = {
   noLabel: true;
   labelProps?: never;
 };
-export type MaybeLabel<T> = T extends isNoLabel ? NeverLabel : WithLabel;
+export type MaybeLabel<T> = T extends true ? NeverLabel : WithLabel;
 
 const mapper = {
   validateStatus: (valid: VALIDSTATUS): FormItemProps['validateStatus'] => {

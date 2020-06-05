@@ -1,8 +1,9 @@
 {
     "name": "antfox",
-    "version": "0.0.1-beta2",
+    "version": "1.0.0-alpha.2",
     "description": "",
     "main": "dist/antfox.js",
+    "module": "dist/antfox.esm.js",
     "types": "./types",
     "homepage": "https://charlzyx.github.io/antfox/",
     "scripts": {
@@ -80,6 +81,6 @@
         "antfox": "^0.0.1-beta0.2",
         "gh-pages": "^3.0.0",
         "lodash": "^4.17.15",
-        "usefox": "^0.0.1-beta13"
+        "usefox": "^1.0.0-alpha.2"
     }
 }

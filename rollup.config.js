@@ -7,10 +7,13 @@ import visualizer from 'rollup-plugin-visualizer';
 
 export default {
     input: 'src/index.ts',
-    output: {
+    output: [{
         file: 'dist/antfox.js',
         format: 'cjs',
-    },
+    }, {
+        file: 'dist/antfox.esm.js',
+        format: 'es',
+    }],
     plugins: [commonjs(), resolve(), typescript(), visualizer()],
     // 指出应将哪些模块视为外部模块
     external: ['react', 'react-dom', 'antd'],

@@ -18,14 +18,15 @@ const init = {
 };
 
 class CustomeClassComp extends React.Component<{
+  role?: string;
   value?: string;
   onChange?: (x: string) => void;
   suffix?: string;
 }> {
   render() {
-    const { value, onChange, suffix } = this.props;
+    const { value, role, onChange, suffix } = this.props;
     return (
-      <div>
+      <div role={role}>
         <input
           value={value}
           onInput={(e) => {
@@ -42,12 +43,13 @@ class CustomeClassComp extends React.Component<{
 }
 
 const CustomeField: FC<{
+  role?: string;
   value?: string;
   onChange?: (x: string) => void;
   prefix?: string;
-}> = ({ value, prefix, onChange }) => {
+}> = ({ role, value, prefix, onChange }) => {
   return (
-    <div>
+    <div role={role}>
       {prefix}
       <input
         value={value}
@@ -82,15 +84,6 @@ const App = () => {
       <Form act={act} trigger="onChange" init={init}>
         <h2>as</h2>
         <h4>Build-Ins</h4>
-        <Field as="Input" path="reftest" forwardedRef={inputRef}></Field>
-        <Button
-          onClick={() => {
-            console.log('inputRef', inputRef);
-            inputRef.current?.focus();
-          }}
-        >
-          focus
-        </Button>
         <Field
           as="Input"
           path="username"
@@ -99,6 +92,20 @@ const App = () => {
           rule={Yup.string().max(6).min(1)}
         ></Field>
         <Field as="Pager" path="pager" label="页码"></Field>
+        <Field
+          role="reftest"
+          as="Input"
+          path="reftest"
+          forwardedRef={inputRef}
+        ></Field>
+        <Button
+          onClick={() => {
+            console.log('inputRef', inputRef);
+            inputRef.current?.focus();
+          }}
+        >
+          focus input up
+        </Button>
         <h4>Function Component</h4>
         <Field
           as={CustomeField}

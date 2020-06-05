@@ -21,7 +21,7 @@ import {
 import { AutoCompleteProps } from 'antd/es/auto-complete';
 import { CascaderProps } from 'antd/es/cascader';
 import { CheckboxGroupProps, CheckboxProps } from 'antd/es/checkbox';
-import { DatePickerProps } from 'antd/es/date-picker';
+import { DatePickerProps } from 'antd/es/date-picker/interface';
 import {
   InputProps,
   PasswordProps,
@@ -53,7 +53,6 @@ export type BuildIns = {
   MonthPicker: Clean<typeof DatePicker['MonthPicker']>;
   RangePicker: Clean<typeof DatePicker['RangePicker']>;
   WeekPicker: Clean<typeof DatePicker['WeekPicker']>;
-  YearPicker: Clean<typeof DatePicker['YearPicker']>;
   Input: Clean<InputProps>;
   Password: Clean<PasswordProps>;
   TextArea: Clean<TextAreaProps>;
@@ -157,7 +156,6 @@ export const lib: any = {
   MonthPicker: DatePicker.MonthPicker,
   RangePicker: DatePicker.RangePicker,
   WeekPicker: DatePicker.WeekPicker,
-  YearPicker: DatePicker.YearPicker,
   Input: Input,
   Search: Input.Search,
   TextArea: Input.TextArea,

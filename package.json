@@ -1,6 +1,6 @@
 {
     "name": "antfox",
-    "version": "4.0.0-alpha.1",
+    "version": "3.0.0-alpha.1",
     "description": "",
     "main": "dist/antfox.js",
     "module": "dist/antfox.esm.js",
@@ -77,8 +77,8 @@
         "typescript": "^3.8.3"
     },
     "dependencies": {
-        "antd": "4.x",
-        "yup": "^0.29.1",
-        "usefox": "^1.0.0-alpha.2"
+        "antd": "3.x",
+        "usefox": "^1.0.0-alpha.2",
+        "yup": "^0.29.1"
     }
 }

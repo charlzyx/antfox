@@ -12,7 +12,7 @@
         "build:lib": "./node_modules/.bin/rollup -c",
         "build:type": "rm -rf ./types && tsc -p tsconfig.types.json && rm -rf ./types/App && rm -rf ./types/**/__tests__",
         "build": "npm run build:lib && npm run build:type",
-        "predeploy": "npm run build",
+        "predeploy": "npm run doc",
         "deploy": "gh-pages -d build",
         "test": "jest test"
     },

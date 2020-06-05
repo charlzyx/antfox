@@ -2,7 +2,7 @@ import { TFieldOption, TFieldState } from 'usefox';
 import { MaybeLabel } from './Label';
 import { LegacyRef } from 'react';
 import { BuildIns } from './main';
-export type { BuildIns } from './main';
+export { BuildIns } from './main';
 export declare type PickProps<T> = T extends (props: infer P1) => any
   ? P1
   : T extends React.ComponentClass<infer P2>

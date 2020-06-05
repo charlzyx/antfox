@@ -4,7 +4,7 @@ export { default as Form } from './Form';
 export * from './types';
 
 export { match, useAffect, useField, useNormalizeSerialize } from 'usefox';
-export type {
+export {
   Rule,
   Rules,
   TAct,

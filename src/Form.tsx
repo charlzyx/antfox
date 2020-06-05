@@ -1,5 +1,5 @@
 import { Form } from 'antd';
-import type { FormProps } from 'antd/es/form';
+import { FormProps } from 'antd/es/form';
 import { Fox, TConfig } from 'usefox';
 import React, { Component } from 'react';
 

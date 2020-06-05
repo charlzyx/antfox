@@ -1,4 +1,3 @@
-import { CloseOutlined } from '@ant-design/icons';
 import { Button, Col, Row } from 'antd';
 import { FFC, Field } from 'antfox';
 import React from 'react';
@@ -45,7 +44,6 @@ const LinkEditor: FFC = ({ value, arrays }) => {
                         arrays?.remove(idx);
                       }}
                     >
-                      <CloseOutlined />
                       删除
                     </Button>
                   </Col>

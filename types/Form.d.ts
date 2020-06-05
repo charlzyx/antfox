@@ -1,4 +1,4 @@
-import type { FormProps } from 'antd/es/form';
+import { FormProps } from 'antd/es/form';
 import { TConfig } from 'usefox';
 import { Component } from 'react';
 declare type Props<T extends object> = TConfig<T> &

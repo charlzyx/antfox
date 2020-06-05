@@ -18,28 +18,28 @@ import {
   TreeSelect,
   Upload,
 } from 'antd';
-import type { AutoCompleteProps } from 'antd/es/auto-complete';
-import type { CascaderProps } from 'antd/es/cascader';
-import type { CheckboxGroupProps, CheckboxProps } from 'antd/es/checkbox';
-import type { DatePickerProps } from 'antd/es/date-picker';
-import type {
+import { AutoCompleteProps } from 'antd/es/auto-complete';
+import { CascaderProps } from 'antd/es/cascader';
+import { CheckboxGroupProps, CheckboxProps } from 'antd/es/checkbox';
+import { DatePickerProps } from 'antd/es/date-picker';
+import {
   InputProps,
   PasswordProps,
   SearchProps,
   TextAreaProps,
 } from 'antd/es/input';
-import type { InputNumberProps } from 'antd/es/input-number';
-import type { MentionProps } from 'antd/es/mentions';
+import { InputNumberProps } from 'antd/es/input-number';
+import { MentionProps } from 'antd/es/mentions';
 import { PaginationProps } from 'antd/es/pagination';
-import type { RadioGroupProps, RadioProps } from 'antd/es/radio';
-import type { RateProps } from 'antd/es/rate';
+import { RadioGroupProps, RadioProps } from 'antd/es/radio';
+import { RateProps } from 'antd/es/rate';
 import { SelectProps } from 'antd/es/select';
-import type { SliderProps } from 'antd/es/slider';
-import type { SwitchProps } from 'antd/es/switch';
-import type { TimePickerProps } from 'antd/es/time-picker';
-import type { TransferProps } from 'antd/es/transfer';
-import type { TreeSelectProps } from 'antd/es/tree-select';
-import type { UploadProps } from 'antd/es/upload';
+import { SliderProps } from 'antd/es/slider';
+import { SwitchProps } from 'antd/es/switch';
+import { TimePickerProps } from 'antd/es/time-picker';
+import { TransferProps } from 'antd/es/transfer';
+import { TreeSelectProps } from 'antd/es/tree-select';
+import { UploadProps } from 'antd/es/upload';
 import React, { FC } from 'react';
 
 type Clean<T> = Omit<T, 'value' | 'onChange' | 'onBlur' | 'onFocus' | 'render'>;

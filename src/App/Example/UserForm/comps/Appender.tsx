@@ -1,4 +1,3 @@
-import { PlusOutlined } from '@ant-design/icons';
 import { Button, Popconfirm, Row } from 'antd';
 import { Field, Form, useAffect } from 'antfox';
 import React, { FC } from 'react';
@@ -37,10 +36,7 @@ const Appender: FC<{
           </Form>
         }
       >
-        <Button>
-          <PlusOutlined></PlusOutlined>
-          添加联系方式
-        </Button>
+        <Button>添加联系方式</Button>
       </Popconfirm>
     </Row>
   );
